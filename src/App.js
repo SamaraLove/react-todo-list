@@ -6,16 +6,22 @@ import "./App.css";
 function App(){
   //variables
   const [todos, setTodos] = useState([
-    "Finish plus project",
-    "more tasks",
-    "Even more",
+    {text: "Finish plus project", isCompleted: false},
+    {text: "more tasks", isCompleted: false},
+    {text: "even more tasks", isCompleted: false},
   ]);
 
   //methods
   const addTodo = (text) => {
-    const newTodos = [...todos, text];
+    const newTodos = [...todos, {text}];
     setTodos(newTodos);
   };
+
+  const completeTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].isCompleted = true;
+    setTodos(newTodos);
+  }
 
   //template
   return (
@@ -23,7 +29,12 @@ function App(){
       <div className="todo-list">
         <h1>My todo list</h1>
         {todos.map((todo, index) => (
-          <TodoItem todo={todo} key={index} />
+          <TodoItem 
+            todo={todo} 
+            key={index} 
+            index={index} 
+            completeTodo={completeTodo}
+          />
         ))}
         <TodoForm addTodo={addTodo} />
       </div>
