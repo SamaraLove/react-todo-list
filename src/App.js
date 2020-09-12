@@ -23,6 +23,12 @@ function App(){
     setTodos(newTodos);
   }
 
+  const removeTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos.splice(index,1);
+    setTodos(newTodos);
+  }
+
   //template
   return (
     <div className="app">
@@ -34,6 +40,7 @@ function App(){
             key={index} 
             index={index} 
             completeTodo={completeTodo}
+            removeTodo={removeTodo}
           />
         ))}
         <TodoForm addTodo={addTodo} />
